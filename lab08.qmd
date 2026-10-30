@@ -1,0 +1,79 @@
+---
+title: "Lab 8: CART, Bagging, and Random Forests"
+format: pdf
+editor: source
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ISLR2)
+library(tidyverse)
+library(randomForest)
+library(rpart)
+library(rpart.plot)
+```
+
+## Problem 1
+
+This problem uses the `OJ` data set from the `ISLR2` package. The data set contains 1070 observations and 18 variables. Each observation represents a customer and the characteristics of the orange juice brand they purchases. The first variable, `Purchase`, is a binary response variable, indicating if the customer purchase Citrus Hill (CH) or Minute Maid (MM) orange juice.
+
+Run the following chunk to produce a training dataset `OJ_train` and an independent test set, `OJ_test`.
+
+```{r}
+set.seed(1)
+data(OJ)
+training_indices <- sample(nrow(OJ),700,replace=FALSE)
+OJ_train <- OJ[training_indices,]
+OJ_test <- OJ[-training_indices,]
+rm(OJ,training_indices)
+```
+
+(a) Fit a *deep* tree to the training data, with `Purchase` as the response and all other variables as predictors. (*Hint: The `cp` control argument could be useful!*). Then, display a plot of your tree.
+
+(b) Make predictions on the test data and produce a confusion matrix of the results. What is the test error rate?
+
+(c) Plot the cross-validated error rates for the tree. Then, create a pruned tree based on your plot, and plot the pruned tree.
+
+(d) Calculate the **training error** for the *deep* and *pruned* trees. Which is higher? Explain why this occurs.
+
+(e) Calculate the **test error** for the *deep* and *pruned* trees. Which is higher? Explain why this occurs.
+
+------------------------------------------------------------------------
+
+```{r}
+
+```
+
+------------------------------------------------------------------------
+
+\newpage
+
+## Problem 2: Comparing Regression Models with `College` Data
+
+For this exercise, we will continue our analysis of the `College` data from the ISLR2 package completed in our last lab. Again, we will attempt to predict the `Outstate` variable, which indicates the college's out-of-state tuition rate in 1995. Load the data with the following code:
+
+```{r}
+set.seed(1)
+data("College")
+training_indices <- sample(nrow(College),600,replace=FALSE)
+College_train <- College[training_indices,]
+College_test <- College[-training_indices,]
+rm(College,training_indices)
+```
+
+(a) Create the following **two** ensemble models on the training data. *NOTE:* Ensure your ensemble methods average *enough* models to gain the benefits of ensembling, but not too many to be slow. Recall that the number of models in your ensemble does *not* lead to overfitting.
+
+- A `randomForest()` model that performs only **bagging** and no actual random forests (recall that bagging is the special case of random forests with $m = p$).
+- A `randomForest()` model that uses $m = p/3$.
+
+(b) Calculate the test RMSE for each model and compare. Which model performs best on test data?
+
+(c) Create a variable importance plot for each model. What features are most important for predicting out-of-state tuition?
+
+------------------------------------------------------------------------
+
+```{r}
+
+```
+
+------------------------------------------------------------------------
